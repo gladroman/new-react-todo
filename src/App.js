@@ -39,15 +39,20 @@ function App() {
             "descr": null
         }
     ])
-    const onDelete = (id)=> {
+    const onDelete = (id) => {
         setTasks([...tasks.filter(task => task.id !== id)])
     }
-    return (
-        <div className="App">
-            <TodoListSidebar />
-            <TaskList tasks={tasks} onDelete={onDelete} />
-        </div>
-    );
+    function handleToggleDone(id) {
+        const newTasks = tasks.map((task) => task.id === id ? {...task, done: !task.done}: task )
+        setTasks(newTasks)
+
+    }
+return (
+    <div className="App">
+        <TodoListSidebar />
+        <TaskList tasks={tasks} onDelete={onDelete} handleToggleDone={handleToggleDone} />
+    </div>
+);
 }
 
 export default App;

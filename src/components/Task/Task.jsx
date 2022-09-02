@@ -1,10 +1,10 @@
 import React from 'react'
 import './TaskStyle.css'
 
-function Task({ task, onDelete }) {
+function Task({ task, onDelete, handleToggleDone }) {
     let { id, name, done, due_date, descr } = task
     let taskClass = 'task'
-    const now = (new Date()).setUTCHours(23,59,59,999);
+    const now = (new Date()).setUTCHours(23, 59, 59, 999);
 
     descr = descr || "No description"
 
@@ -17,7 +17,15 @@ function Task({ task, onDelete }) {
     return (
         <div className={taskClass}>
             <p className='date'>{due_date}</p>
-            <h3><input type="checkbox" />{name}</h3>
+            <h3>
+                <input
+                    type="checkbox"
+                    checked = {done}
+                    onChange={()=>{
+                        handleToggleDone(id)
+                    }}
+                    />{name}
+            </h3>
             <p>{descr}</p>
             <span
                 onClick={() => {
