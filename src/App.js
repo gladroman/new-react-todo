@@ -25,7 +25,7 @@ function App() {
         {
             "id": 3,
             "name": "third task",
-            "due_date": "2022-09-01T21:00:00.000Z",
+            "due_date": "2022-08-01T21:00:00.000Z",
             "done": false,
             "list_id": 2,
             "descr": null
@@ -42,9 +42,6 @@ function App() {
     const onDelete = (id)=> {
         setTasks([...tasks.filter(task => task.id !== id)])
     }
-    useEffect(()=>{
-        console.log("render")
-    },[])
     return (
         <div className="App">
             <TodoListSidebar />
