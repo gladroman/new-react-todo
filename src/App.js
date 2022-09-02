@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import TaskList from './components/TasksList/TaskList';
 import TodoListSidebar from './components/TodoListSidebar/TodoListSidebar';
@@ -33,16 +33,22 @@ function App() {
         {
             "id": 5,
             "name": "fifth task",
-            "due_date": "2022-08-30T21:00:00.000Z",
+            "due_date": null,
             "done": false,
             "list_id": 2,
             "descr": null
         }
     ])
+    const onDelete = (id)=> {
+        setTasks([...tasks.filter(task => task.id !== id)])
+    }
+    useEffect(()=>{
+        console.log("render")
+    },[])
     return (
         <div className="App">
             <TodoListSidebar />
-            <TaskList tasks={tasks} />
+            <TaskList tasks={tasks} onDelete={onDelete} />
         </div>
     );
 }
