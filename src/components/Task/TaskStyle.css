@@ -1,0 +1,43 @@
+.task {
+    position: relative;
+    width: 600px;
+    height: 186px;
+    margin: 15px auto;
+    padding: 15px;
+    /* text-align: center; */
+    background-color: #fff;
+    border-radius: 5%;
+    border-top: 5px solid gray;
+}
+
+.task.done {
+    border-top: 5px solid green;
+}
+
+.task span {
+    position: absolute;
+    font-size: 20px;
+    right:15px;
+    top: 15px;
+    cursor: pointer;
+}
+
+.date {
+    color: rgb(0, 0, 0);
+}
+
+.overdue {
+    border-top: 5px solid rgb(255, 105, 105);
+}
+
+.overdue .date {
+    color: rgb(255, 97, 97);
+}
+
+.done .date {
+    color: darkgrey;
+}
+.done h3{
+    color: darkgrey;
+    text-decoration: line-through;
+}

@@ -1,0 +1,12 @@
+aside {
+    flex: 1;
+}
+
+ul {
+    list-style-type: none;
+}
+
+li {
+    margin: 15px;
+    font-size: 20px;
+}
