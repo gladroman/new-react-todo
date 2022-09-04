@@ -3,6 +3,8 @@ import './App.css';
 import TaskList from './components/TasksList/TaskList';
 import TodoListSidebar from './components/TodoListSidebar/TodoListSidebar';
 import Modal from './components/Modal/Modal';
+import axios from 'axios';
+import { getTasks, createTask, getDashboard } from './axios/axios';
 
 const defaultTasks = [
     {
@@ -40,7 +42,13 @@ const defaultTasks = [
 ]
 function App() {
     const [tasks, setTasks] = useState(defaultTasks)
+    const [dashboard,setDashboard] = useState({today:null,lists:[]})
     const [isModalActive,  setIsModalActive] = useState(false)
+
+    useEffect(()=>{
+        getDashboard().then(res=>setDashboard(res))
+    },[tasks])
+    
 
     const onDelete = (id) => {
         setTasks([...tasks.filter(task => task.id !== id)])
@@ -50,16 +58,22 @@ function App() {
         setTasks(newTasks)
 
     }
-    const addTask=(newTask)=>{
-        setTasks([...tasks,newTask])
-        handleToggleModal()
+    const addTask=async (newTask)=>{
+        try {
+            const result = await createTask(newTask)
+            setTasks([...tasks,result])
+            handleToggleModal()
+        } catch (e) {
+            console.log('АШИПКА')
+        }
+        
     }
     const  handleToggleModal= () => setIsModalActive(!isModalActive)
 return (
     <div className="App">
-        <TodoListSidebar />
+        <TodoListSidebar dashboard={dashboard}/>
         <TaskList tasks={tasks} onDelete={onDelete} handleToggleModal={handleToggleModal} handleToggleDone={handleToggleDone} />
-        {isModalActive&&<Modal addTask={addTask} handleToggleModal={handleToggleModal}/>}
+        {isModalActive&&<Modal dashboard= {dashboard} addTask={addTask} handleToggleModal={handleToggleModal}/>}
     </div>
 );
 }

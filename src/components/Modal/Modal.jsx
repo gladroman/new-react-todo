@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import './ModalStyle.css'
 
-function Modal({addTask, handleToggleModal}) {
-    const [task, setTask] = useState({ name: '', due_date: '', descr: '' })
+function Modal({ dashboard, addTask, handleToggleModal }) {
+    const [task, setTask] = useState({ name: '', due_date: '', descr: '' ,list_id:''})
     const [isError, setIsError] = useState(false)
     const handleChange = (e) => {
         const { name, value } = e.target
@@ -12,7 +12,7 @@ function Modal({addTask, handleToggleModal}) {
         e.preventDefault()
         if (!task.name) {
             setIsError(true)
-        }else{
+        } else {
             addTask(task)
         }
     }
@@ -31,11 +31,9 @@ function Modal({addTask, handleToggleModal}) {
 
                     <label >Description<input name="descr" type="text" placeholder="Description..." value={task.descr} onChange={handleChange} /></label>
 
-                    {/* <select value={task.name}>
-                        <option>List 1</option>
-                        <option>List 2</option>
-                        <option>List 3</option>
-                    </select> */ }
+                    <select name="list_id" value={task.list_id} onChange={handleChange}>
+                        {dashboard.lists.map((list)=><option value={list.id}>{list.name}</option>)}
+                    </select>
                     <button type='submit'> Submit </button>
                 </form>
                 <span id='close' onClick={handleToggleModal} >Close</span>
