@@ -4,58 +4,36 @@ import TaskList from './components/TasksList/TaskList';
 import TodoListSidebar from './components/TodoListSidebar/TodoListSidebar';
 import Modal from './components/Modal/Modal';
 import axios from 'axios';
-import { getTasks, createTask, getDashboard } from './axios/axios';
+import { getTasks, createTask, getDashboard ,patchTask } from './axios/axios';
 
-const defaultTasks = [
-    {
-        "id": 1,
-        "name": "First Task",
-        "due_date": "2022-09-01T21:00:00.000Z",
-        "done": true,
-        "list_id": 2,
-        "descr": null
-    },
-    {
-        "id": 28,
-        "name": "My first task created on front",
-        "due_date": "2022-09-03T21:00:00.000Z",
-        "done": true,
-        "list_id": 2,
-        "descr": "something"
-    },
-    {
-        "id": 3,
-        "name": "third task",
-        "due_date": "2022-08-01T21:00:00.000Z",
-        "done": false,
-        "list_id": 2,
-        "descr": null
-    },
-    {
-        "id": 5,
-        "name": "fifth task",
-        "due_date": null,
-        "done": false,
-        "list_id": 2,
-        "descr": null
-    }
-]
+
 function App() {
-    const [tasks, setTasks] = useState(defaultTasks)
+    const [tasks, setTasks] = useState([])
     const [dashboard,setDashboard] = useState({today:null,lists:[]})
     const [isModalActive,  setIsModalActive] = useState(false)
+
 
     useEffect(()=>{
         getDashboard().then(res=>setDashboard(res))
     },[tasks])
+    useEffect(()=>{
+        getTasks(2).then(res=>setTasks(res))
+    },[])
     
 
     const onDelete = (id) => {
         setTasks([...tasks.filter(task => task.id !== id)])
     }
-    function handleToggleDone(id) {
-        const newTasks = tasks.map((task) => task.id === id ? {...task, done: !task.done}: task )
-        setTasks(newTasks)
+    async function handleToggleDone(modTask) {
+        try {
+            await patchTask(modTask,{done:!modTask.done})
+            const newTasks = tasks.map((task) => task.id === modTask.id ? {...task, done: !task.done}: task )
+            setTasks(newTasks)
+        } catch (e) {
+            console.log('АШИПКА')
+        }
+        
+        
 
     }
     const addTask=async (newTask)=>{

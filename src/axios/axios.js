@@ -11,7 +11,10 @@ function getTasks(list_id) {
 }
 
 function createTask(task) {
-    return axios.post(`lists/${task.list_id}/tasks`, task).then(res => res.data)
+    return axios.post(`lists/${task.list_id}/tasks`,task).then(res => res.data)
+}
+function patchTask(task,body){
+    return axios.patch(`lists/${task.list_id}/tasks/${task.id}`, body).then(res => res.data)
 }
 
-export { getDashboard, getTasks, createTask }
+export { getDashboard, getTasks, createTask, patchTask }

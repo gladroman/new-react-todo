@@ -22,7 +22,7 @@ function Task({ task, onDelete, handleToggleDone }) {
                     type="checkbox"
                     checked = {done}
                     onChange={()=>{
-                        handleToggleDone(id)
+                        handleToggleDone(task)
                     }}
                     />{name}
             </h3>
