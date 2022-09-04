@@ -11,10 +11,18 @@ function getTasks(list_id) {
 }
 
 function createTask(task) {
+    console.log(task)
     return axios.post(`lists/${task.list_id}/tasks`,task).then(res => res.data)
 }
+
 function patchTask(task,body){
     return axios.patch(`lists/${task.list_id}/tasks/${task.id}`, body).then(res => res.data)
 }
+function deleteTask(task) {
+    return axios.delete(`lists/${task.list_id}/tasks/${task.id}`).then(res => res.data)
+}
+function getTodayTasks() {
+    return axios.get('collection/today').then(res=>res.data)
+}
 
-export { getDashboard, getTasks, createTask, patchTask }
+export { getDashboard, getTasks, createTask, patchTask, deleteTask, getTodayTasks }

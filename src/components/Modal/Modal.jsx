@@ -2,10 +2,12 @@ import { useState } from 'react'
 import './ModalStyle.css'
 
 function Modal({ dashboard, addTask, handleToggleModal }) {
-    const [task, setTask] = useState({ name: '', due_date: '', descr: '' ,list_id:''})
+    const [task, setTask] = useState({ name: '', due_date: '', descr: '', list_id: '' })
     const [isError, setIsError] = useState(false)
     const handleChange = (e) => {
+        e.preventDefault()
         const { name, value } = e.target
+        console.log(e.target.value)
         setTask({ ...task, [name]: value })
     }
     const submitTask = (e) => {
@@ -30,10 +32,12 @@ function Modal({ dashboard, addTask, handleToggleModal }) {
                     <label >Deadline<input name="due_date" type="date" value={task.due_date} onChange={handleChange} /></label>
 
                     <label >Description<input name="descr" type="text" placeholder="Description..." value={task.descr} onChange={handleChange} /></label>
-
-                    <select name="list_id" value={task.list_id} onChange={handleChange}>
-                        {dashboard.lists.map((list)=><option value={list.id}>{list.name}</option>)}
-                    </select>
+                    <label >List
+                        <select defaultValue="" name="list_id" value={task.list_id} onChange={handleChange}>
+                            <option value ="" disabled>Select List</option>
+                            {dashboard.lists.map((list) => <option value={list.id} key={list.id}>{list.name}</option>)}
+                        </select>
+                        </label>
                     <button type='submit'> Submit </button>
                 </form>
                 <span id='close' onClick={handleToggleModal} >Close</span>

@@ -1,5 +1,7 @@
 aside {
     flex: 1;
+    background-color: #fff;
+    max-width: 200px;
 }
 
 ul {

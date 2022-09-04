@@ -1,14 +1,14 @@
 import React from 'react'
+import { Link, useParams } from 'react-router-dom'
 import './TodoListSidebarStyle.css'
 
-function TodoListSidebar({ dashboard }) {
+function TodoListSidebar({ dashboard, onSelectList}) {
     return (
         <aside>
-            {console.log(dashboard)}
             {dashboard.lists &&
                 <ul>
-                    <li>Today: {dashboard.today}</li>
-                    {dashboard.lists.map(list => <li key={list.id}>{list.name}({list.undone})</li>)}
+                    <Link to="today"><li>Today: {dashboard.today}</li></Link>
+                    {dashboard.lists.map(list => <Link to ={`/todo-list/${list.id}`} key={list.id}><li onClick={()=>onSelectList(list)}>{list.name}({list.undone})</li></Link>)}
                 </ul>
             }
         </aside>

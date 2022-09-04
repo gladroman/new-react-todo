@@ -2,7 +2,7 @@ import React from 'react'
 import './TaskStyle.css'
 
 function Task({ task, onDelete, handleToggleDone }) {
-    let { id, name, done, due_date, descr } = task
+    let { name, done, due_date, descr } = task
     let taskClass = 'task'
     const now = (new Date()).setUTCHours(23, 59, 59, 999);
 
@@ -29,7 +29,7 @@ function Task({ task, onDelete, handleToggleDone }) {
             <p>{descr}</p>
             <span
                 onClick={() => {
-                    onDelete(id)
+                    onDelete(task)
                 }}>
                 {'\u274C'}
             </span>

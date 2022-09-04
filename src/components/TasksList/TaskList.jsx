@@ -1,13 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import "./TaskListStyle.css"
 import Task from '../Task/Task'
 
-function TaskList({ tasks, onDelete , handleToggleDone, handleToggleModal}) {
+function TaskList({ selectedList, tasks, onDelete, handleToggleDone, handleToggleModal, onPageUpdate }) {
     return (
         <main>
-            <h1>First List <span onClick={handleToggleModal} className="create-btn">+</span> 
-            </h1>
-            {tasks.map(task => <Task task={task} onDelete={onDelete} handleToggleDone={handleToggleDone} key={task.id}/>)}
+            <h1>{selectedList.name} <span onClick={handleToggleModal} className="create-btn">+</span> </h1>
+            {tasks.map(task => <Task task={task} onDelete={onDelete} handleToggleDone={handleToggleDone} key={task.id} />)}
         </main>
     )
 }
