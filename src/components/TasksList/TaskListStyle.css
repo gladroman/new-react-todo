@@ -1,7 +1,12 @@
 main {
-    background-color: #F6FAFD;
+    background-color: #d7edfc;
     flex: 3;
 }
 h1 {
     text-align: center;
+}
+
+.create-btn {
+    font-weight: bold;
+    color: rgb(9, 173, 9);
 }
