@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
-import { Route, Routes} from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import TodoListPage from './pages/TodoListPage'
 import TodayTasksPage from './pages/TodayTasksPage';
 import TodoListSidebar from './components/TodoListSidebar/TodoListSidebar';
-import  { getDashboard } from './axios/axios'
+import TasksProvider from './context/TasksProvider';
+import { getDashboard } from './axios/axios'
 
 
 function App() {
@@ -17,15 +18,17 @@ function App() {
 
 
     return (
+        <TasksProvider>
+            <div className="App">
+                <TodoListSidebar dashboard={dashboard} />
+                <Routes>
+                    <Route path="/" element={<h1>Hi :DD</h1>}></Route>
+                    <Route path="/todo-list/:id" element={<TodoListPage dashboard={dashboard} />}></Route>
+                    <Route path="/today" element={<TodayTasksPage />}></Route>
+                </Routes>
+            </div>
 
-        <div className="App">
-            <TodoListSidebar dashboard={dashboard} />
-            <Routes>
-                <Route path="/" element={<h1>Hi :DD</h1>}></Route>
-                <Route path="/todo-list/:id" element={<TodoListPage dashboard={dashboard} />}></Route>
-                <Route path="/today" element={<TodayTasksPage />}></Route>
-            </Routes>
-        </div>
+        </TasksProvider>
     );
 }
 

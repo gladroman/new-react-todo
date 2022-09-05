@@ -1,9 +1,11 @@
 import React from 'react'
+import { useContext } from 'react';
 import { useState, useEffect } from 'react'
 import { getTasks, createTask, patchTask, deleteTaskFromDB } from '../axios/axios';
+import TasksProvider from '../context/TasksProvider';
 
 function useTasks(endpoint) {
-    const [tasks, setTasks] = useState([])
+    const {tasks,setTasks} = useContext(TasksProvider)
 
     useEffect(() => {
         getTasks(endpoint).then(res => setTasks(res))
