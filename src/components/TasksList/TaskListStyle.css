@@ -5,6 +5,9 @@ main {
 h1 {
     text-align: center;
 }
+span {
+    text-align: center;
+}
 
 .create-btn {
     font-weight: bold;

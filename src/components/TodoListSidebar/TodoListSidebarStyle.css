@@ -4,6 +4,12 @@ aside {
     max-width: 200px;
 }
 
+a {
+    color: #333;
+    font-size: 20px;
+    text-decoration: none;
+  }
+
 ul {
     list-style-type: none;
 }
@@ -12,3 +18,23 @@ li {
     margin: 15px;
     font-size: 20px;
 }
+
+.inactive li{
+    padding: 5px 0 5px 10px;
+  }
+  
+  .inactive li:hover {
+    color: #333;
+    border-radius: 10px;
+    background: rgb(207, 207, 207);
+  }
+  .active li:hover {
+    color: #fff;
+  }
+  
+  .active li{
+    padding: 5px 0 5px 10px;
+    background: #6c757d;
+    color: #fff;
+    border-radius: 10px;
+  }

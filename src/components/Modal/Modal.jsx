@@ -2,12 +2,10 @@ import { useState } from 'react'
 import './ModalStyle.css'
 
 function Modal({ dashboard, addTask, handleToggleModal }) {
-    const [task, setTask] = useState({ name: '', due_date: '', descr: '', list_id: '' })
+    const [task, setTask] = useState({ name: '', due_date: null, descr: '', list_id: '' })
     const [isError, setIsError] = useState(false)
     const handleChange = (e) => {
-        e.preventDefault()
         const { name, value } = e.target
-        console.log(e.target.value)
         setTask({ ...task, [name]: value })
     }
     const submitTask = (e) => {
@@ -16,6 +14,7 @@ function Modal({ dashboard, addTask, handleToggleModal }) {
             setIsError(true)
         } else {
             addTask(task)
+            handleToggleModal()
         }
     }
     return (

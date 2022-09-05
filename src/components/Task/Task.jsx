@@ -1,18 +1,25 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import './TaskStyle.css'
 
-function Task({ task, onDelete, handleToggleDone }) {
+function Task({ task, deleteTask,updateTask }) {
     let { name, done, due_date, descr } = task
     let taskClass = 'task'
-    const now = (new Date()).setUTCHours(23, 59, 59, 999);
+    const today = (new Date()).setUTCHours(0, 0, 0, 0);
 
     descr = descr || "No description"
 
-    due_date = due_date ? new Date(due_date) : "No Date"
+    due_date = due_date ? toDate(due_date) : "No Date"
 
-    taskClass += done ? " done" : now > due_date ? " overdue" : ''
+    taskClass += done ? " done" : today > due_date ? " overdue" : ''
 
     due_date = due_date instanceof Date ? due_date.toISOString().split('T')[0] : due_date
+
+    function toDate(date) {
+        date = new Date(date)
+        date.setTime(date.getTime()+(3*60*60*1000))
+        return date
+    }
 
     return (
         <div className={taskClass}>
@@ -22,17 +29,19 @@ function Task({ task, onDelete, handleToggleDone }) {
                     type="checkbox"
                     checked = {done}
                     onChange={()=>{
-                        handleToggleDone(task)
+                        updateTask(task)
                     }}
                     />{name}
             </h3>
             <p>{descr}</p>
             <span
                 onClick={() => {
-                    onDelete(task)
+                    deleteTask(task)
                 }}>
                 {'\u274C'}
             </span>
+           {task.list && <Link to={`/todo-list/${task.list.id}`}> <label className='list-label'>{task.list.name}</label></Link>
+            }
         </div>
     )
 }

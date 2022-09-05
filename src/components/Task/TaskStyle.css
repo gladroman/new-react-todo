@@ -41,3 +41,11 @@
     color: darkgrey;
     text-decoration: line-through;
 }
+
+.list-label {
+    padding: 5px;
+    background-color: #d7edfc;
+    position:absolute;
+    bottom: 15px;
+    right: 15px;
+}
