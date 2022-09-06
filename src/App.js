@@ -4,17 +4,19 @@ import './App.css';
 import TodoListPage from './pages/TodoListPage'
 import TodayTasksPage from './pages/TodayTasksPage';
 import TodoListSidebar from './components/TodoListSidebar/TodoListSidebar';
-import { getDashboard } from './axios/axios'
+import { fetchDashboard, getDashboard } from './axios/axios'
+import { useDispatch } from 'react-redux';
 
 
 function App() {
 
     const [dashboard, setDashboard] = useState({ today: null, lists: [] })
 
-
+    const dispatch = useDispatch()
 
     useEffect(() => {
         getDashboard().then(res => setDashboard(res))
+        dispatch(fetchDashboard())
     },[])
 
 
