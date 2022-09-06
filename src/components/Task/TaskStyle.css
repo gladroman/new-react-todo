@@ -14,7 +14,7 @@
     border-top: 5px solid green;
 }
 
-.task span {
+.task-close-btn {
     position: absolute;
     font-size: 20px;
     right:15px;

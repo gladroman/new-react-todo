@@ -6,7 +6,7 @@ import useTasks from '../hooks/UseTasks'
 
 function TodoListPage( { dashboard }) {
     const { id } = useParams()
-    const { tasks, addTask, deleteTask, updateTask } = useTasks(`http://localhost:3334/lists/${id}/tasks?all=true`,)
+    const { tasks, addTask, deleteTask, updateTask } = useTasks(`http://localhost:3334/lists/${id}/tasks?all=true`)
     const [isModalActive, setIsModalActive] = useState(false)
     const list = dashboard.lists.filter((list)=>list.id == id)[0]
     const handleToggleModal = () => setIsModalActive(!isModalActive)

@@ -4,7 +4,6 @@ import useTasks from '../hooks/UseTasks'
 
 function TodayTasksPage() {
     const { tasks, deleteTask, updateTask } = useTasks(`http://localhost:3334/collection/today`)
-    console.log(tasks)
     return (
         <main>
             <TasksList

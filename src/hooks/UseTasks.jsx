@@ -1,11 +1,9 @@
-import React from 'react'
-import { useContext } from 'react';
 import { useState, useEffect } from 'react'
 import { getTasks, createTask, patchTask, deleteTaskFromDB } from '../axios/axios';
-import TasksProvider from '../context/TasksProvider';
+
 
 function useTasks(endpoint) {
-    const {tasks,setTasks} = useContext(TasksProvider)
+    const [ tasks, setTasks ] = useState([])
 
     useEffect(() => {
         getTasks(endpoint).then(res => setTasks(res))
@@ -32,10 +30,11 @@ function useTasks(endpoint) {
         }
     }
 
-    const updateTask = async (modTask) => {
+    const updateTask = async (task, body) => {
+        const {id} = task
         try {
-            await patchTask(modTask, { done: !modTask.done })
-            const newTasks = tasks.map((task) => task.id === modTask.id ? { ...task, done: !task.done } : task)
+            await patchTask(task, body)
+            const newTasks = tasks.map((task) => task.id === id ? { ...task, ...body } : task)
             setTasks(newTasks)
         } catch (e) {
             console.log('АШИПКА')

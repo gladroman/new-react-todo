@@ -1,40 +1,36 @@
 aside {
-    flex: 1;
-    background-color: #fff;
-    max-width: 200px;
+  flex: 1;
+  background-color: #fff;
+  max-width: 200px;
 }
 
 a {
-    color: #333;
-    font-size: 20px;
-    text-decoration: none;
-  }
+  color: #333;
+  font-size: 20px;
+  text-decoration: none;
+}
 
 ul {
-    list-style-type: none;
+  list-style-type: none;
 }
 
 li {
-    margin: 15px;
-    font-size: 20px;
+  margin: 15px;
+  font-size: 20px;
 }
 
-.inactive li{
-    padding: 5px 0 5px 10px;
-  }
-  
-  .inactive li:hover {
-    color: #333;
-    border-radius: 10px;
-    background: rgb(207, 207, 207);
-  }
-  .active li:hover {
-    color: #fff;
-  }
-  
-  .active li{
-    padding: 5px 0 5px 10px;
-    background: #6c757d;
-    color: #fff;
-    border-radius: 10px;
-  }
+.inactive li {
+  padding: 5px;
+}
+
+.inactive li:hover {
+  color: #333;
+  border-radius: 15px;
+  background: #cde6f7;
+}
+
+.active li {
+  padding: 5px;
+  background: #a5d6f7;
+  border-radius: 15px;
+}
