@@ -21,6 +21,7 @@ function TodoListPage( { dashboard }) {
                     
 
         {isModalActive && <Modal 
+                            id={id}
                             dashboard={dashboard} 
                             addTask={addTask} 
                             handleToggleModal={handleToggleModal} />}            

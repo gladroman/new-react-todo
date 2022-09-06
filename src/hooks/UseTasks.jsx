@@ -10,10 +10,13 @@ function useTasks(endpoint) {
     }, [endpoint])
 
 
-    const addTask = async (newTask) => {
+    const addTask = async (newTask,id) => {
         try {
             const result = await createTask(newTask)
-            setTasks([...tasks, result])
+            if(id === newTask.list_id){
+                setTasks([...tasks, result])
+            }
+            
 
         } catch (e) {
             console.log('АШИПКА')

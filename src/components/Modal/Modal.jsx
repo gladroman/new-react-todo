@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './ModalStyle.css'
 
-function Modal({ dashboard, addTask, handleToggleModal }) {
+function Modal({ id, dashboard, addTask, handleToggleModal }) {
     const [task, setTask] = useState({ name: '', due_date: null, descr: '', list_id: '' })
     const [isError, setIsError] = useState(false)
     const handleChange = (e) => {
@@ -13,7 +13,7 @@ function Modal({ dashboard, addTask, handleToggleModal }) {
         if (!task.name) {
             setIsError(true)
         } else {
-            addTask(task)
+            addTask(task,id)
             handleToggleModal()
         }
     }
