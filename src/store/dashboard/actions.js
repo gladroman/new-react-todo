@@ -6,13 +6,7 @@ axios.defaults.baseURL = 'http://localhost:3334/'
 const DASHBOARD_LOADED = "dashboard/loaded"
 
 
-const selectList = id=>{
-    return state=>{
-
-    return state.dashboard.lists.find(list=>list.id === id)
-}
-}
-
+const selectList = id => state => state.dashboard.lists.find(list=>list.id === id)
 
 const dashboardAction = (payload)=>({type: DASHBOARD_LOADED, payload})
 
