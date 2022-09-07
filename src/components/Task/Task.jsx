@@ -4,7 +4,7 @@ import './TaskStyle.css'
 
 const defaultEditState = {name:false,due_date:false,descr:false}
 
-function Task({ task, deleteTask, updateTask }) {
+function Task({ task, onDeleteTask, updateTask }) {
     const [isEdit, setIsEdit] = useState(defaultEditState)
     let { name, done, due_date, descr } = task
     const [body,setBody] = useState({})
@@ -86,7 +86,7 @@ function Task({ task, deleteTask, updateTask }) {
                     
                     <span className='task-close-btn'
                         onClick={() => {
-                            deleteTask(task)
+                            onDeleteTask(task)
                         }}>
                         {'\u274C'}
                     </span>

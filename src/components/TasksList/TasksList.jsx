@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import "./TaskListStyle.css"
 import Task from '../Task/Task'
+import { selectList } from '../../store/dashboard/actions'
+import { useSelector } from 'react-redux'
 
-function TasksList({ list,tasks,deleteTask, updateTask, handleToggleModal }) {
+function TasksList({list_id, tasks, onDeleteTask, updateTask, handleToggleModal }) {
     const [showDone,setShowDone] = useState(false)
+
+    const list = useSelector(selectList(list_id))
+
     let tasksToRender
     if (!showDone && tasks) {
         tasksToRender = tasks.filter(t => !t.done)
@@ -15,7 +20,7 @@ function TasksList({ list,tasks,deleteTask, updateTask, handleToggleModal }) {
         tasks ? <div>
              {list && <h1>{list && list.name}<span onClick={handleToggleModal} className="create-btn">+</span></h1>}
              {list &&<label ><input checked = {showDone} type="checkbox" onChange={handleShowDone} />Show Done</label>}
-            {tasksToRender.map(task => <Task task={task} deleteTask={deleteTask} updateTask={updateTask} key={task.id} />)}
+            {tasksToRender.map(task => <Task task={task} onDeleteTask={onDeleteTask} updateTask={updateTask} key={task.id} />)}
         </div>
         :
         <h1>Loading...</h1>

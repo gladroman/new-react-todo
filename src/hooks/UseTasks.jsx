@@ -1,53 +1,40 @@
 import { useState, useEffect } from 'react'
-import { getTasks, createTask, patchTask, deleteTaskFromDB } from '../axios/axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { getTasks,  patchTask, deleteTaskFromDB } from '../axios/axios';
+import { loadTasks, loadTodayTasks, createTask, deleteTask } from '../store/tasks/actions';
 
 
-function useTasks(endpoint) {
-    const [ tasks, setTasks ] = useState([])
+function useTasks(id) {
+    const dispatch = useDispatch()
+    useEffect(()=>{
+        id ? dispatch(loadTasks(id)) : dispatch(loadTodayTasks())
+    },[id])
+    const tasksSelector = id ? state=>state.tasks[id] : state=>state.tasks.today             
+    const tasks = useSelector(tasksSelector)
 
-    useEffect(() => {
-        getTasks(endpoint).then(res => setTasks(res))
-    }, [endpoint])
-
-
-    const addTask = async (newTask,id) => {
-        try {
-            const result = await createTask(newTask)
-            if(id === newTask.list_id){
-                setTasks([...tasks, result])
-            }
-            
-
-        } catch (e) {
-            console.log('АШИПКА')
-        }
-
+    const onAddTask = (newTask) => {
+        dispatch(createTask(newTask))
     }
 
-    const deleteTask = async (taskToDel) => {
-        try {
-            await deleteTaskFromDB(taskToDel)
-            setTasks([...tasks.filter(task => task.id !== taskToDel.id)])
-        } catch (e) {
-            console.log('АШИПКА')
-        }
+    const onDeleteTask = task => {
+        dispatch(deleteTask(task))
     }
 
-    const updateTask = async (task, body) => {
-        const {id} = task
-        try {
-            await patchTask(task, body)
-            const newTasks = tasks.map((task) => task.id === id ? { ...task, ...body } : task)
-            setTasks(newTasks)
-        } catch (e) {
-            console.log('АШИПКА')
-        }
-    }
+    // const updateTask = async (task, body) => {
+    //     const {id} = task
+    //     try {
+    //         await patchTask(task, body)
+    //         const newTasks = tasks.map((task) => task.id === id ? { ...task, ...body } : task)
+    //         setTasks(newTasks)
+    //     } catch (e) {
+    //         console.log('АШИПКА')
+    //     }
+    // }
     return {
         tasks,
-        addTask,
-        deleteTask,
-        updateTask
+        onAddTask,
+        onDeleteTask,
+        // updateTask
     }
 
 

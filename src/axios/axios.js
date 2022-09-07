@@ -1,5 +1,4 @@
 import axios from "axios";
-import { dashboardAction } from '../store/index'
 
 axios.defaults.baseURL = 'http://localhost:3334/'
 
@@ -25,9 +24,5 @@ function getTodayTasks() {
     return axios.get('collection/today').then(res => res.data).catch((e) => console.log(e))
 }
 
-export const fetchDashboard = () => {
-    return function (dispatch) {
-        axios.get(`dashboard`).then(res => res.data).then(dashboard => dispatch(dashboardAction(dashboard)))
-    }
-}
+
 export { getDashboard, getTasks, createTask, patchTask, deleteTaskFromDB, getTodayTasks }

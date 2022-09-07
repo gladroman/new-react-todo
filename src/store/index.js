@@ -1,21 +1,20 @@
-import { applyMiddleware, createStore, compose } from "redux";
+import { applyMiddleware, createStore, compose, combineReducers } from "redux";
 import thunk from "redux-thunk"
+import dashboardReducer from './dashboard/reducer'
+import tasksReducer from "./tasks/reducer";
 
-const DASHBOARD_LOAD = "DASHBOARD_LOAD"
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const reducer = (state = {dashboard:[]}, action)=>{
-    switch (action.type) {
-        case DASHBOARD_LOAD:
-            return {...state, dashboard: [...state.dashboard, ...action.payload]}
-            
-        default:
-            return state
-    }
-}
-
-const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk))) 
+const rootReducer = combineReducers({
+    dashboard: dashboardReducer,
+    tasks: tasksReducer
+})
 
 
-const dashboardAction = (payload)=>({type: DASHBOARD_LOAD, payload})
-export {store, dashboardAction}
+
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk))) 
+
+export default store
+
+

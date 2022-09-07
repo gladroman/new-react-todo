@@ -4,29 +4,28 @@ import './App.css';
 import TodoListPage from './pages/TodoListPage'
 import TodayTasksPage from './pages/TodayTasksPage';
 import TodoListSidebar from './components/TodoListSidebar/TodoListSidebar';
-import { fetchDashboard, getDashboard } from './axios/axios'
+import { getDashboard } from './axios/axios'
 import { useDispatch } from 'react-redux';
+import {fetchDashboard} from './store/dashboard/actions'
+import { loadTasks } from './store/tasks/actions';
 
 
 function App() {
-
-    const [dashboard, setDashboard] = useState({ today: null, lists: [] })
-
     const dispatch = useDispatch()
 
     useEffect(() => {
-        getDashboard().then(res => setDashboard(res))
-        dispatch(fetchDashboard())
+        dispatch(fetchDashboard)
     },[])
+    
 
 
     return (
 
         <div className="App">
-            <TodoListSidebar dashboard={dashboard} />
+            <TodoListSidebar />
             <Routes>
                 <Route path="/" element={<h1>Hi :DD</h1>}></Route>
-                <Route path="/todo-list/:id" element={<TodoListPage dashboard={dashboard} />}></Route>
+                <Route path="/todo-list/:list_id" element={<TodoListPage/>}></Route>
                 <Route path="/today" element={<TodayTasksPage />}></Route>
             </Routes>
         </div>
