@@ -38,10 +38,8 @@ const loadTodayTasks = () => dispatch => {
 const createTask = newTask => dispatch => {
     axios.post(`lists/${newTask.list_id}/tasks`, newTask)
         .then(res => res.data)
-        .then(task => dispatch({
-            type: ADD_TASK,
-            task
-        }))
+        .then(task => ({type: ADD_TASK, task}))
+        .then(dispatch)
 }
 
 const deleteTask = task => dispatch => {
