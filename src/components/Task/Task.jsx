@@ -4,7 +4,7 @@ import './TaskStyle.css'
 
 const defaultEditState = {name:false,due_date:false,descr:false}
 
-function Task({ task, onDeleteTask, updateTask }) {
+function Task({ task, onDeleteTask, onUpdateTask }) {
     const [isEdit, setIsEdit] = useState(defaultEditState)
     let { name, done, due_date, descr } = task
     const [body,setBody] = useState({})
@@ -31,7 +31,7 @@ function Task({ task, onDeleteTask, updateTask }) {
     }
     const submitForm = (e) => {
         e.preventDefault()
-        updateTask(task,body)
+        onUpdateTask(task,body)
         setIsEdit(defaultEditState)
 
     }
@@ -73,7 +73,7 @@ function Task({ task, onDeleteTask, updateTask }) {
                                                 type="checkbox"
                                                 checked = {done}
                                                 onChange={()=>{
-                                                    updateTask(task,{done: !done})
+                                                    onUpdateTask(task,{done: !done})
                                                 }}
                                                 />{name}
                                         </h3>}

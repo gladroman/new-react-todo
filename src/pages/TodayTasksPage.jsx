@@ -3,13 +3,13 @@ import TasksList from '../components/TasksList/TasksList'
 import useTasks from '../hooks/UseTasks'
 
 function TodayTasksPage() {
-    const { tasks, deleteTask, updateTask } = useTasks()
+    const { tasks, onDeleteTask, onUpdateTask } = useTasks()
     return (
         <main>
             <TasksList
                 tasks={tasks}
-                deleteTask={deleteTask}
-                updateTask={updateTask}/>
+                oneleteTask={onDeleteTask}
+                onUpdateTask={onUpdateTask}/>
         </main>
     )
 }

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import './ModalStyle.css'
 
-function Modal({ id, addTask, handleToggleModal }) {
+function Modal({ id, onAddTask, handleToggleModal }) {
     const [task, setTask] = useState({ name: '', due_date: null, descr: '', list_id: '' })
     const [isError, setIsError] = useState(false)
     const dashboard = useSelector(state=>state.dashboard)
@@ -15,7 +15,7 @@ function Modal({ id, addTask, handleToggleModal }) {
         if (!task.name) {
             setIsError(true)
         } else {
-            addTask(task,id)
+            onAddTask(task,id)
             handleToggleModal()
         }
     }

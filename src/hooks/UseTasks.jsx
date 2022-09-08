@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { getTasks,  patchTask, deleteTaskFromDB } from '../axios/axios';
-import { loadTasks, loadTodayTasks, createTask, deleteTask } from '../store/tasks/actions';
+import { loadTasks, loadTodayTasks, createTask, deleteTask, updateTask } from '../store/tasks/actions';
 
 
 function useTasks(id) {
@@ -20,21 +20,14 @@ function useTasks(id) {
         dispatch(deleteTask(task))
     }
 
-    // const updateTask = async (task, body) => {
-    //     const {id} = task
-    //     try {
-    //         await patchTask(task, body)
-    //         const newTasks = tasks.map((task) => task.id === id ? { ...task, ...body } : task)
-    //         setTasks(newTasks)
-    //     } catch (e) {
-    //         console.log('АШИПКА')
-    //     }
-    // }
+    const onUpdateTask = (task, body) => {
+        dispatch(updateTask(task,body))
+    }
     return {
         tasks,
         onAddTask,
         onDeleteTask,
-        // updateTask
+        onUpdateTask
     }
 
 

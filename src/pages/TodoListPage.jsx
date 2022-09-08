@@ -7,7 +7,7 @@ import useTasks from '../hooks/UseTasks'
 function TodoListPage( { dashboard }) {
     let { list_id} = useParams()
     list_id =Number(list_id)
-    const { tasks, onAddTask, onDeleteTask, updateTask } = useTasks(list_id)
+    const { tasks, onAddTask, onDeleteTask, onUpdateTask } = useTasks(list_id)
     const [isModalActive, setIsModalActive] = useState(false)
     const handleToggleModal = () => setIsModalActive(!isModalActive)
   return (
@@ -16,7 +16,7 @@ function TodoListPage( { dashboard }) {
                     list_id={list_id}
                     tasks={tasks}
                     onDeleteTask={onDeleteTask}
-                    updateTask={updateTask} 
+                    onUpdateTask={onUpdateTask} 
                     handleToggleModal={handleToggleModal}/>
                     
 

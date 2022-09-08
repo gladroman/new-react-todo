@@ -9,10 +9,11 @@ const TASKS_LOADED = 'tasks/loaded'
 const TODAY_TASKS_LOADED = 'todayTasks/loaded'
 const ADD_TASK = 'task/added'
 const DELETE_TASK = 'task/deleted'
+const UPDATE_TASK = 'task/updated'
 
 
 const loadTasks = listId => dispatch => {
-    axios.get(`lists/${listId}/tasks`)
+    axios.get(`lists/${listId}/tasks?all=true`)
         .then(res => res.data)
         .then(tasks => dispatch({
             type: TASKS_LOADED,
@@ -49,4 +50,14 @@ const deleteTask =task=>dispatch=>{
 
 }
 
-export { TASKS_LOADED,TODAY_TASKS_LOADED, ADD_TASK, DELETE_TASK , loadTasks, loadTodayTasks, createTask, deleteTask }
+const updateTask =(task,body)=>dispatch=>{
+    axios.patch(`lists/${task.list_id}/tasks/${task.id}`,body)
+        .then(res=>res.data)
+        .then(task=>dispatch({
+            type:UPDATE_TASK,
+            task
+        }))
+
+}
+
+export { TASKS_LOADED,TODAY_TASKS_LOADED, ADD_TASK, DELETE_TASK, UPDATE_TASK , loadTasks, loadTodayTasks, createTask, deleteTask, updateTask }
