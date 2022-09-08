@@ -9,7 +9,7 @@ function TodayTasksPage() {
             <TasksList
                 tasks={tasks}
                 oneleteTask={onDeleteTask}
-                onUpdateTask={onUpdateTask}/>
+                onUpdateTask={onUpdateTask} />
         </main>
     )
 }

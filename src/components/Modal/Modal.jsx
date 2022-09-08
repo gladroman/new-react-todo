@@ -5,7 +5,7 @@ import './ModalStyle.css'
 function Modal({ id, onAddTask, handleToggleModal }) {
     const [task, setTask] = useState({ name: '', due_date: null, descr: '', list_id: '' })
     const [isError, setIsError] = useState(false)
-    const dashboard = useSelector(state=>state.dashboard)
+    const dashboard = useSelector(state => state.dashboard)
     const handleChange = (e) => {
         const { name, value } = e.target
         setTask({ ...task, [name]: value })
@@ -15,7 +15,7 @@ function Modal({ id, onAddTask, handleToggleModal }) {
         if (!task.name) {
             setIsError(true)
         } else {
-            onAddTask(task,id)
+            onAddTask(task, id)
             handleToggleModal()
         }
     }
@@ -35,10 +35,10 @@ function Modal({ id, onAddTask, handleToggleModal }) {
                     <label >Description<input name="descr" type="text" placeholder="Description..." value={task.descr} onChange={handleChange} /></label>
                     <label >List
                         <select defaultValue="" name="list_id" value={task.list_id} onChange={handleChange}>
-                            <option value ="" disabled>Select List</option>
+                            <option value="" disabled>Select List</option>
                             {dashboard.lists.map((list) => <option value={list.id} key={list.id}>{list.name}</option>)}
                         </select>
-                        </label>
+                    </label>
                     <button type='submit'> Submit </button>
                 </form>
                 <span id='close' onClick={handleToggleModal} >Close</span>
